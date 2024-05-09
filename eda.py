@@ -7,7 +7,7 @@ def run_eda():
 
     st.text('데이터 프레임 보기 / 통계치 보기를 할 수 있습니다.')
 
-    df = pd.read_csv('./data/인천_버스정류장_이용현황_24-03-25.csv', encoding='euc-kr')
+    df = pd.read_csv('./data/(가공한)인천_버스정류장_이용현황_24-03-25.csv', encoding='euc-kr')
 
     radio_menu = ['데이터 프레임', '통계치']
 

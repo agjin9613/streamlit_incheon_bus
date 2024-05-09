@@ -6,8 +6,9 @@ def run_eda():
     st.subheader('인천버스 정류장별 승객 이용현황')
 
     st.text('데이터 프레임 보기 / 통계치 보기를 할 수 있습니다.')
+    st.markdown('<p style="font-weight: bold;">※ 해당 데이터 셋의 최종 수정일은 2024-04-18 입니다.</p>', unsafe_allow_html=True)
 
-    df = pd.read_csv('./data/(가공한)인천_버스정류장_이용현황_24-03-25.csv', encoding='euc-kr')
+    df = pd.read_csv('./data/(가공한)인천광역시_정류장별 이용승객 현황_2024-04-18.csv', encoding='euc-kr')
 
     radio_menu = ['데이터 프레임', '통계치']
 
@@ -17,22 +18,22 @@ def run_eda():
         st.dataframe(df)
     elif choice_radio == radio_menu[1]:
         st.dataframe(df.describe())
-
-         # 최대/최소값 및 상관관계 분석
-    st.text('컬럼을 선택하면, 각 컬럼별 최대/최소 데이터를 보여드립니다.')
-    column_list = ['승차건수(총합계)', '하차건수(총합계)', '승차건수(카드)', '하차건수(카드)', '승차건수(현금)', '일평균 승하차건수']
+        
+    # 최대/최소값 및 상관관계 분석
+    st.text('컬럼을 선택하면, 각 컬럼별 최대/최소 데이터를 각각 5개씩 보여드립니다.')
+    column_list = ['총 승차', '총 하차', '카드 승차', '카드 하차', '현금 승차', ' 일평균 승하차', '총 승차 대비 총 하차', '총 하차 대비 총 승차', '카드 승차 대비 카드 하차', '카드 하차 대비 카드 승차', '현금 승차 대비 카드 승차', '카드 승차 대비 현금 승차']
     choice_column = st.selectbox('컬럼을 선택하세요.', column_list)
     
-    st.info(f'선택하신 {choice_column}의 최대 데이터는 다음과 같습니다.')
-    st.dataframe(df.loc[df[choice_column] == df[choice_column].max()])
+    st.info(f'선택하신 {choice_column}의 최대 정류장은 다음과 같습니다.')
+    st.dataframe(df.nlargest(5, choice_column))
     
-    st.info(f'선택하신 {choice_column}의 최소 데이터는 다음과 같습니다.')
-    st.dataframe(df.loc[df[choice_column] == df[choice_column].min()])
+    st.info(f'선택하신 {choice_column}의 최소 정류장은 다음과 같습니다.')
+    st.dataframe(df.nsmallest(5, choice_column))
 
     st.subheader('상관관계 분석')
     st.text('컬럼들을 2개 이상 선택하면, 컬럼들의 상관계수를 보여드립니다.')
 
-    corr_column_list = ['승차건수(총합계)', '하차건수(총합계)', '승차건수(카드)', '하차건수(카드)', '승차건수(현금)', '일평균 승하차건수']
+    corr_column_list = ['총 승차', '총 하차', '카드 승차', '카드 하차', '현금 승차', ' 일평균 승하차', '총 승차 대비 총 하차', '총 하차 대비 총 승차', '카드 승차 대비 카드 하차', '카드 하차 대비 카드 승차', '현금 승차 대비 카드 승차', '카드 승차 대비 현금 승차']
     selected_columns = st.multiselect('컬럼을 선택하세요.', corr_column_list)
 
     # 2개 이상 선택했을때와 그렇지 않을때로 개발

@@ -6,7 +6,7 @@ import matplotlib.font_manager as fm
 
 def run_eda():
     # 한글 폰트 설정
-    font_path = 'C:/Windows/Fonts/malgun.ttf'
+    font_path = 'C:/Windows/Fonts/gulim.ttc'
     font_name = fm.FontProperties(fname=font_path).get_name()
     plt.rc('font', family=font_name)
 

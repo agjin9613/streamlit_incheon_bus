@@ -3,7 +3,7 @@ from home import run_home
 from eda import run_eda
 
 def main():
-    st.title('인천버스 분석 및 예측 앱')
+    st.title('인천버스 이용현황을 알아보아요.')
 
     menu = ['메인', '분석 및 통계']
 

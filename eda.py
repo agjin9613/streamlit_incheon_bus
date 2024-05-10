@@ -2,13 +2,10 @@ import streamlit as st
 import pandas as pd
 import seaborn as sb
 import matplotlib.pyplot as plt
-import matplotlib.font_manager as fm
 
 def run_eda():
     # 한글 폰트 설정
-    font_path = 'C:/Windows/Fonts/gulim.ttc'
-    font_name = fm.FontProperties(fname=font_path).get_name()
-    plt.rc('font', family=font_name)
+    plt.rcParams['font.family'] = 'NanumGothic'
 
     st.subheader('인천버스 정류장별 승객 이용현황')
 
